@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="mx.sos.era.easyretail.ui.controller.CatalogoEmpresasController"
+            stylesheets="@css/company-tiles.css"
+            prefWidth="800" prefHeight="600"
+            styleClass="root">
+
+    <!-- Encabezado superior -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header">
+            <Label text="Selecciona una empresa" styleClass="header-title"/>
+        </HBox>
+    </top>
+
+    <!-- Área central con tiles -->
+    <center>
+        <FlowPane fx:id="flowEmpresas" hgap="30" vgap="30" alignment="CENTER" styleClass="tile-container">
+        </FlowPane>
+    </center>
+</BorderPane>

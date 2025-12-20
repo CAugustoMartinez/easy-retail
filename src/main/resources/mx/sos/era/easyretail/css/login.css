@@ -1,0 +1,132 @@
+/* Contenedor */
+.login-box {
+    -fx-background-color: linear-gradient(to right, #2A3F5B, #3A4F6B);
+    -fx-background-radius: 15;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+}
+
+/* Títulos y textos */
+.login-title {
+    -fx-text-fill: white;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.login-subtitle {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.login-message {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-size: 12px;
+}
+
+/* Labels */
+.input-label {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-size: 12px;
+}
+
+/* Campos de entrada (base) */
+.input-field {
+    -fx-background-color: #F4F4F4;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+}
+
+/* Ajustes de altura y consistencia entre PasswordField y TextField visible */
+.input-field, .visible-password {
+    -fx-pref-height: 36px;
+    -fx-min-height: 36px;
+    -fx-max-height: 36px;
+}
+
+/* Campo de contraseña en texto claro (hereda visualmente de .input-field) */
+.visible-password {
+    /* hereda estilos de .input-field; usar para ajustes puntuales si se requiere */
+}
+
+/* Enlaces y ayudas */
+.forgot-link {
+    -fx-text-fill: #68A8D4;
+    -fx-font-size: 12px;
+}
+
+/* Botón principal */
+.login-button {
+    -fx-background-color: #3B83C4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+}
+
+/* Hover */
+.login-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4C94D8, #3B83C4);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 8, 0.4, 0, 3);
+    -fx-translate-y: -1;
+}
+
+/* Presionado */
+.login-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #2F6BA0, #2A5C8A);
+    -fx-effect: none;
+    -fx-translate-y: 1;
+}
+
+/* Separadores y etiquetas secundarias */
+.or-label {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-size: 12px;
+}
+
+.social-button {
+    -fx-background-color: #3A4E66;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-font-size: 12px;
+    -fx-padding: 8 12;
+    -fx-pref-width: 120;
+}
+
+.signup-label {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-size: 12px;
+}
+
+.signup-link {
+    -fx-text-fill: #68A8D4;
+    -fx-font-size: 12px;
+}
+
+/* Errores */
+.label-error {
+    -fx-text-fill: #D32F2F;
+    -fx-font-weight: bold;
+}
+
+/* Botón ojo (mostrar/ocultar contraseña) */
+.eye-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 6 8;
+    -fx-font-size: 12px;
+    -fx-text-fill: #2A3F5B;
+    -fx-pref-height: 36px;
+    -fx-min-width: 36px;
+    -fx-alignment: center;
+}
+
+/* Variante con icono (usar si añades recurso gráfico) */
+/* .eye-button.icon {
+    -fx-background-image: url("/icons/eye-open.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 18px 18px;
+    -fx-text-fill: transparent;
+} */

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.SearchableComboBox?>
+
+<BorderPane prefHeight="630" prefWidth="700" styleClass="root" stylesheets="@css/crear-empresa.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.sos.era.easyretail.ui.controller.CrearEmpresaController">
+
+    <top>
+        <HBox styleClass="header">
+            <Label styleClass="header-title" text="Crear nueva empresa" />
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll">
+            <content>
+                <VBox spacing="16">
+                    <padding>
+                        <Insets bottom="16" left="16" right="16" top="16" />
+                    </padding>
+
+                    <!-- DATOS GENERALES -->
+                    <TitledPane text="Datos generales">
+                        <content>
+                            <VBox spacing="8">
+                                <padding>
+                                    <Insets bottom="8" left="8" right="8" top="8" />
+                                </padding>
+
+                                <!-- RAZÓN SOCIAL primero (requerido) -->
+                                <Label text="Razón social" />
+                                <TextField fx:id="txtRazonSocial" promptText="Razón social" />
+
+                                <!-- NOMBRE COMERCIAL después (opcional) -->
+                                <Label text="Nombre comercial (opcional)" />
+                                <TextField fx:id="txtNombre" promptText="Nombre comercial" />
+
+                                <!-- RFC -->
+                                <Label text="RFC" />
+                                <TextField fx:id="txtRfc" promptText="RFC" />
+
+                                <!-- RÉGIMEN FISCAL como ComboBox -->
+                                <Label text="Régimen fiscal" />
+                                <SearchableComboBox fx:id="cmbRegimenFiscal" promptText="Selecciona régimen fiscal" />
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- DIRECCIÓN FISCAL -->
+                    <TitledPane expanded="false" text="Dirección fiscal">
+                        <content>
+                            <VBox spacing="8">
+                                <padding>
+                                    <Insets bottom="8" left="8" right="8" top="8" />
+                                </padding>
+                                <GridPane hgap="12.0" vgap="12.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
+                                    </columnConstraints>
+
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+
+                                    <children>
+
+                                        <!-- País (col 0, row 0) -->
+                                        <Label text="País" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                        <ComboBox fx:id="cmbPais" maxWidth="Infinity" promptText="Selecciona país" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+
+                                        <!-- Código postal (col 2 label, col 2-3 input) -->
+                                        <Label text="Código postal" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                        <HBox spacing="8" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                            <TextField fx:id="txtCodigoPostal" promptText="Código postal" HBox.hgrow="ALWAYS" />
+                                            <Button onAction="#onBuscarCodigoPostal" text="Buscar" />
+                                        </HBox>
+
+                                        <!-- Estado (col 0 label + combo) -->
+                                        <Label text="Estado" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                        <ComboBox fx:id="cmbEstado" maxWidth="Infinity" promptText="Estado" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+
+                                        <!-- Municipio (col 1 label + combo) -->
+                                        <Label text="Municipio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <ComboBox fx:id="cmbMunicipio" maxWidth="Infinity" promptText="Municipio" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+
+                                        <!-- Colonia (col 2 label + combo spanning col 2-3) -->
+                                        <Label text="Colonia" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                        <ComboBox fx:id="cmbColonia" maxWidth="Infinity" promptText="Colonia" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+
+                                        <!-- Calle (label + field spanning col 0-1) -->
+                                        <Label text="Calle" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                        <TextField fx:id="txtCalle" maxWidth="Infinity" promptText="Calle" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+
+                                        <!-- Número exterior / interior (col 2 and col 3) -->
+                                        <Label text="Número exterior" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                        <TextField fx:id="txtNumeroExterior" maxWidth="Infinity" promptText="No. exterior" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+
+                                        <Label text="Número interior" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                        <TextField fx:id="txtNumeroInterior" maxWidth="Infinity" promptText="No. interior" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+
+                                    </children>
+                                </GridPane>
+
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- CONTACTO -->
+                    <TitledPane expanded="false" text="Contacto">
+                        <content>
+                            <VBox spacing="8">
+                                <padding>
+                                    <Insets bottom="8" left="8" right="8" top="8" />
+                                </padding>
+
+                                <TextField fx:id="txtEmail" promptText="Email de contacto" />
+                                <TextField fx:id="txtTelefono" promptText="Teléfono" />
+                                <TextField fx:id="txtPaginaWeb" promptText="Página web" />
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- CONFIGURACIÓN DE BASE DE DATOS (prefill y deshabilitado) -->
+                    <TitledPane expanded="false" text="Configuración de base de datos">
+                        <content>
+                            <VBox spacing="8">
+                                <padding>
+                                    <Insets bottom="8" left="8" right="8" top="8" />
+                                </padding>
+
+                                <TextField fx:id="txtHost" disable="true" editable="false" promptText="Host" />
+                                <TextField fx:id="txtPort" disable="true" editable="false" promptText="Puerto" />
+                                <TextField fx:id="txtDatabase" disable="true" editable="false" promptText="Nombre de la base de datos" />
+                                <TextField fx:id="txtDbUser" disable="true" editable="false" promptText="Usuario" />
+                                <PasswordField fx:id="txtDbPass" disable="true" editable="false" promptText="Contraseña" />
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- ARCHIVOS -->
+                    <TitledPane expanded="false" text="Archivos">
+                        <content>
+                            <VBox spacing="8">
+                                <padding>
+                                    <Insets bottom="8" left="8" right="8" top="8" />
+                                </padding>
+
+                                <HBox spacing="8">
+                                    <TextField fx:id="txtLogo" editable="false" promptText="Logo" />
+                                    <Button onAction="#onSeleccionarLogo" text="Seleccionar" />
+                                </HBox>
+
+                                <HBox spacing="8">
+                                    <TextField fx:id="txtCertificado" editable="false" promptText="Certificado (.cer)" />
+                                    <Button onAction="#onSeleccionarCertificado" text="Seleccionar" />
+                                </HBox>
+
+                                <HBox spacing="8">
+                                    <TextField fx:id="txtSello" editable="false" promptText="Sello digital (.key)" />
+                                    <Button onAction="#onSeleccionarSello" text="Seleccionar" />
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- BOTONES -->
+                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Button onAction="#onCancelar" styleClass="btn-secondary" text="Cancelar" />
+                        <Button onAction="#onGuardar" styleClass="btn-primary" text="Guardar empresa" />
+                    </HBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,135 @@
+/* Raíz de la vista */
+.root {
+    -fx-background-color: #F5F7FA; /* gris muy claro para look de sistema */
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Barra superior */
+.header {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 12 16;
+    -fx-border-color: transparent transparent #2A3F5B transparent; /* línea inferior azul oscuro */
+    -fx-border-width: 0 0 2 0;
+}
+
+.header-title {
+    -fx-text-fill: #2A3F5B;       /* azul oscuro (coherente con login) */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* Contenedor de tiles */
+.tile-container {
+    -fx-padding: 24;
+    -fx-hgap: 24;
+    -fx-vgap: 24;
+    -fx-alignment: center;
+}
+
+/* Tarjeta de empresa */
+.empresa-tile {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-padding: 16 20;
+    -fx-spacing: 10;
+    -fx-min-width: 220;
+    -fx-min-height: 160;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0.3, 0, 4);
+    -fx-border-color: #E3E7EE;
+    -fx-border-radius: 12;
+}
+
+/* Hover y enfoque para sensación de sistema */
+.empresa-tile:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 16, 0.35, 0, 6);
+    -fx-border-color: #3B83C4; /* azul vibrante como acento */
+}
+
+.empresa-tile:focused {
+    -fx-border-color: #3B83C4;
+    -fx-border-width: 2;
+}
+
+/* Nombre de empresa */
+.empresa-nombre {
+    -fx-text-fill: #2A3F5B; /* azul oscuro */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Imagen del logo: ligeramente redondeado para consistencia visual */
+.image-view {
+    -fx-background-radius: 8;
+}
+
+/* Estados vacíos o mensajes informativos */
+.empty-message {
+    -fx-text-fill: #5A6B85; /* gris azulado suave */
+    -fx-font-size: 14px;
+}
+
+/* Utilidades (por si agregas botones de acción) */
+.button-primary {
+    -fx-background-color: #3B83C4; /* azul vibrante */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+}
+
+.button-secondary {
+    -fx-background-color: #EFEFEF;
+    -fx-text-fill: #2A3F5B;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+}
+
+/* Scrollbars discretos para look de sistema */
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.thumb {
+    -fx-background-color: #C9D3E5; /* gris azulado */
+    -fx-background-radius: 8;
+}
+
+.track {
+    -fx-background-color: #E9EEF6;
+    -fx-background-radius: 8;
+}
+
+/* Tile para crear empresa */
+.tile-add {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-padding: 16 20;
+    -fx-spacing: 10;
+    -fx-min-width: 220;
+    -fx-min-height: 160;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-border-color: #E3E7EE;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0.3, 0, 4);
+}
+
+.tile-add:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 16, 0.35, 0, 6);
+    -fx-border-color: #3B83C4;
+}
+
+.tile-add-plus {
+    -fx-font-size: 48px;
+    -fx-text-fill: #3B83C4;
+}
+
+.tile-add-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2A3F5B;
+}

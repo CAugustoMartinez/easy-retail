@@ -1,0 +1,40 @@
+.root {
+    -fx-background-color: #F5F7FA;
+    -fx-font-family: "Segoe UI";
+}
+
+.header {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 12 16;
+    -fx-border-color: transparent transparent #2A3F5B transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.header-title {
+    -fx-text-fill: #2A3F5B;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.scroll {
+    -fx-background-color: transparent;
+}
+
+.btn-primary {
+    -fx-background-color: #3B83C4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #4C94D8;
+}
+
+.btn-secondary {
+    -fx-background-color: #EFEFEF;
+    -fx-text-fill: #2A3F5B;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+}

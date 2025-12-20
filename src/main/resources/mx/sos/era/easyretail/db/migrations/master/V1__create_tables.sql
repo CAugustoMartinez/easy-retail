@@ -1,0 +1,25 @@
+-- V1__create_empresas.sql
+CREATE TABLE empresas (
+    empresa_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    razon_social VARCHAR(150),
+    rfc VARCHAR(20),
+    regimen_fiscal VARCHAR(50),
+    host VARCHAR(100) NOT NULL,
+    port INT NOT NULL,
+    database_name VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    email_contacto VARCHAR(100),
+    telefono_contacto VARCHAR(20),
+    pagina_web VARCHAR(150),
+    logo_path VARCHAR(200),
+    certificado_path VARCHAR(200),
+    sello_digital_path VARCHAR(200),
+    parametros_json TEXT,
+    activo BOOLEAN DEFAULT TRUE,
+    creado_por VARCHAR(50),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modificado_por VARCHAR(50),
+    fecha_modificacion TIMESTAMP
+);
