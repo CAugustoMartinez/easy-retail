@@ -8,12 +8,14 @@ import javafx.stage.Stage;
 import mx.sos.era.easyretail.master.entity.Empresa;
 import mx.sos.era.easyretail.master.service.EmpresaService;
 import mx.sos.era.easyretail.config.InstallerConfig;
+import org.springframework.lang.NonNull;
 
 import java.io.File;
 import java.util.List;
 
 public class CrearEmpresaController {
 
+    @FXML private TextField txtPassword;
     @FXML private TextField txtNombre;
     @FXML private TextField txtRazonSocial;
     @FXML private TextField txtRfc;
@@ -101,6 +103,18 @@ public class CrearEmpresaController {
             return;
         }
 
+        Empresa e = getEmpresa(razon);
+
+        // Guardar usando el servicio
+        empresaService.crear(e);
+
+        if (onEmpresaGuardada != null) onEmpresaGuardada.run();
+
+        getStage().close();
+    }
+
+    @NonNull
+    private Empresa getEmpresa(String razon) {
         Empresa e = new Empresa();
         e.setRazonSocial(razon.trim());
         // Nombre comercial opcional
@@ -117,13 +131,7 @@ public class CrearEmpresaController {
         e.setLogoPath(txtLogo.getText());
         e.setCertificadoPath(txtCertificado.getText());
         e.setSelloDigitalPath(txtSello.getText());
-
-        // Guardar usando el servicio
-        empresaService.crear(e);
-
-        if (onEmpresaGuardada != null) onEmpresaGuardada.run();
-
-        getStage().close();
+        return e;
     }
 
     @FXML
@@ -141,6 +149,11 @@ public class CrearEmpresaController {
     }
 
     public void onBuscarCodigoPostal(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    private void onProbarContrasena(ActionEvent ignoredActionEvent){
 
     }
 }

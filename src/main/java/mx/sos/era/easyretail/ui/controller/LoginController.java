@@ -2,14 +2,16 @@ package mx.sos.era.easyretail.ui.controller;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import mx.sos.era.easyretail.master.entity.Usuario;
 import mx.sos.era.easyretail.master.service.AuthService;
@@ -23,31 +25,45 @@ public class LoginController {
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @FXML public TextField usuarioField;
-    @FXML public PasswordField passwordField;
-    @FXML public TextField visiblePasswordField;
-    @FXML public Button btnTogglePassword;
-    @FXML public Button loginButton;
-    @FXML public Label lblMessage;
-
+    @FXML
+    public TextField usuarioField;
+    @FXML
+    public PasswordField passwordField;
+    @FXML
+    public TextField visiblePasswordField;
+    @FXML
+    public Button btnTogglePassword;
+    @FXML
+    public Button loginButton;
+    @FXML
+    public Label lblMessage;
+    private ImageView eyeView;
     private final LoginViewModel vmLogin = new LoginViewModel();
     private AuthService authService;
     private LoginListener loginListener;
-
-    private boolean passwordVisible = false;
 
     private Validator validator;
 
     @FXML
     private void initialize() {
+        setupEyeView();
         setBindings();
         setupValidator();
         setupEvents();
 
-        vmLogin.setUsuario("SUPERVISOR");
+        vmLogin.setUser("SUPERVISOR");
+        vmLogin.setPassword("");
+
 
         Platform.runLater(() -> passwordField.requestFocus());
-        updateEyeButton();
+
+    }
+
+    private void setupEyeView() {
+        eyeView = new ImageView();
+        eyeView.setFitWidth(18);
+        eyeView.setFitHeight(18);
+        btnTogglePassword.setGraphic(eyeView);
     }
 
     // ---------------------------
@@ -61,7 +77,7 @@ public class LoginController {
                 .withMethod(c -> {
                     String u = c.get("usuario");
                     if (u == null || u.trim().isEmpty()) {
-                        c.error("El usuario es requerido");
+                        c.error("El usuario es requerido.");
                     }
                 })
                 .decorates(usuarioField)
@@ -72,7 +88,7 @@ public class LoginController {
                 .withMethod(c -> {
                     String p = c.get("password");
                     if (p == null || p.trim().isEmpty()) {
-                        c.error("La contraseña es requerida");
+                        c.error("La contraseña es requerida.");
                     }
                 })
                 .decorates(passwordField)
@@ -83,10 +99,6 @@ public class LoginController {
     // EVENTOS Y TECLAS
     // ---------------------------
     private void setupEvents() {
-        usuarioField.setOnKeyTyped(e -> limpiarError());
-        passwordField.setOnKeyTyped(e -> limpiarError());
-        visiblePasswordField.setOnKeyTyped(e -> limpiarError());
-
         usuarioField.setOnAction(e -> handleLogin());
         passwordField.setOnAction(e -> handleLogin());
         visiblePasswordField.setOnAction(e -> handleLogin());
@@ -100,6 +112,8 @@ public class LoginController {
         if (ev.getCode() == KeyCode.ENTER) {
             ev.consume();
             handleLogin();
+        } else {
+            limpiarError();
         }
     }
 
@@ -107,10 +121,15 @@ public class LoginController {
     // BINDINGS
     // ---------------------------
     private void setBindings() {
-        usuarioField.textProperty().bindBidirectional(vmLogin.usuarioProperty());
-        passwordField.textProperty().bindBidirectional(vmLogin.contraseñaProperty());
-        visiblePasswordField.textProperty().bindBidirectional(passwordField.textProperty());
+        usuarioField.textProperty().bindBidirectional(vmLogin.userProperty());
+        passwordField.textProperty().bindBidirectional(vmLogin.passwordProperty());
+        passwordField.visibleProperty().bind(vmLogin.passwordVisibleProperty().not());
+        passwordField.managedProperty().bind(vmLogin.passwordVisibleProperty().not());
+        visiblePasswordField.textProperty().bindBidirectional(vmLogin.passwordProperty());
         visiblePasswordField.prefWidthProperty().bind(passwordField.prefWidthProperty());
+        visiblePasswordField.visibleProperty().bind(vmLogin.passwordVisibleProperty());
+        visiblePasswordField.managedProperty().bind(vmLogin.passwordVisibleProperty());
+        eyeView.imageProperty().bindBidirectional(vmLogin.eyeIconProperty());
     }
 
     // ---------------------------
@@ -121,19 +140,20 @@ public class LoginController {
         lblMessage.getStyleClass().remove("label-error");
 
         if (!validator.validate()) {
-            mostrarError("Completa los campos requeridos");
+            var error = validator.getValidationResult().getMessages().getFirst();
+            mostrarError(error.getText());
             loginButton.setDisable(false);
             return;
         }
 
-        Usuario usuario = authService.login(vmLogin.getUsuario(), vmLogin.getContraseña());
+        Usuario usuario = authService.login(vmLogin.getUser(), vmLogin.getPassword());
 
         if (usuario == null) {
             lblMessage.getStyleClass().add("label-error");
             mostrarError("Usuario o contraseña incorrectos");
 
             Platform.runLater(() -> {
-                if (passwordVisible) {
+                if (vmLogin.isPasswordVisible()) {
                     visiblePasswordField.requestFocus();
                     visiblePasswordField.selectAll();
                 } else {
@@ -146,22 +166,20 @@ public class LoginController {
             return;
         }
 
-        if (loginListener != null) {
-            loginListener.onLoginSuccess(usuario);
-        }
+        loginListener.onLoginSuccess(usuario);
     }
 
     // ---------------------------
     // UI FEEDBACK
     // ---------------------------
     private void mostrarError(String mensaje) {
+        log.error(mensaje);
 
-        if (lblMessage.getStyleClass().contains("label-error")){
+        if (!lblMessage.getStyleClass().contains("label-error")) {
             lblMessage.getStyleClass().add("label-error");
         }
 
-        Platform.runLater(() -> {});
-        lblMessage.setText(mensaje);
+        Platform.runLater(() -> lblMessage.setText(mensaje));
 
         FadeTransition ft = new FadeTransition(Duration.millis(200), lblMessage);
         ft.setFromValue(0);
@@ -170,6 +188,7 @@ public class LoginController {
     }
 
     private void limpiarError() {
+        log.error("Limpiar mensaje de error");
         lblMessage.getStyleClass().remove("label-error");
         //lblMessage.setText("¡Nos alegra tenerte de vuelta!");
     }
@@ -177,29 +196,16 @@ public class LoginController {
     // ---------------------------
     // OJO DE CONTRASEÑA
     // ---------------------------
-    public void onTogglePassword(ActionEvent actionEvent) {
-        passwordVisible = !passwordVisible;
+    public void onTogglePassword() {
+        vmLogin.tooglePasswordVisible();
 
-        visiblePasswordField.setVisible(passwordVisible);
-        visiblePasswordField.setManaged(passwordVisible);
-
-        passwordField.setVisible(!passwordVisible);
-        passwordField.setManaged(!passwordVisible);
-
-        if (passwordVisible) {
+        if (vmLogin.isPasswordVisible()) {
             visiblePasswordField.requestFocus();
             visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
         } else {
             passwordField.requestFocus();
             passwordField.positionCaret(passwordField.getText().length());
         }
-
-        updateEyeButton();
-    }
-
-    private void updateEyeButton() {
-        btnTogglePassword.setText(passwordVisible ? "Ocultar" : "Mostrar");
-        btnTogglePassword.setAccessibleText(passwordVisible ? "Ocultar contraseña" : "Mostrar contraseña");
     }
 
     // ---------------------------
@@ -211,5 +217,15 @@ public class LoginController {
 
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
+    }
+
+    public void handleMinimize(MouseEvent mouseEvent) {
+        Stage stage = (Stage) ((Label) mouseEvent.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    public void handleClose(MouseEvent mouseEvent) {
+        Stage stage = (Stage) ((Label) mouseEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

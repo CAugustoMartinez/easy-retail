@@ -16,11 +16,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.SearchableComboBox?>
 
-<BorderPane prefHeight="630" prefWidth="700" styleClass="root" stylesheets="@css/crear-empresa.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.sos.era.easyretail.ui.controller.CrearEmpresaController">
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane prefHeight="630" prefWidth="700" styleClass="root" stylesheets="@css/crear-empresa.css"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.sos.era.easyretail.ui.controller.CrearEmpresaController">
 
     <top>
         <HBox styleClass="header">
-            <Label styleClass="header-title" text="Crear nueva empresa" />
+            <Label styleClass="header-title" text="Crear nueva empresa"/>
         </HBox>
     </top>
 
@@ -29,96 +33,105 @@
             <content>
                 <VBox spacing="16">
                     <padding>
-                        <Insets bottom="16" left="16" right="16" top="16" />
+                        <Insets bottom="16" left="16" right="16" top="16"/>
                     </padding>
 
                     <!-- DATOS GENERALES -->
-                    <TitledPane text="Datos generales">
+                    <TitledPane text="Datos generales" styleClass="titled-pane-custom">
                         <content>
-                            <VBox spacing="8">
-                                <padding>
-                                    <Insets bottom="8" left="8" right="8" top="8" />
-                                </padding>
-
+                            <VBox styleClass="titled-content">
                                 <!-- RAZÓN SOCIAL primero (requerido) -->
-                                <Label text="Razón social" />
-                                <TextField fx:id="txtRazonSocial" promptText="Razón social" />
+                                <Label text="Razón social" styleClass="field-label"/>
+                                <TextField fx:id="txtRazonSocial" promptText="Razón social" styleClass="text-field-custom"/>
 
                                 <!-- NOMBRE COMERCIAL después (opcional) -->
-                                <Label text="Nombre comercial (opcional)" />
-                                <TextField fx:id="txtNombre" promptText="Nombre comercial" />
+                                <Label text="Nombre comercial (opcional)" styleClass="field-label"/>
+                                <TextField fx:id="txtNombre" promptText="Nombre comercial" styleClass="text-field-custom"/>
 
                                 <!-- RFC -->
-                                <Label text="RFC" />
-                                <TextField fx:id="txtRfc" promptText="RFC" />
+                                <Label text="RFC" styleClass="field-label"/>
+                                <TextField fx:id="txtRfc" promptText="RFC" styleClass="text-field-custom"/>
 
                                 <!-- RÉGIMEN FISCAL como ComboBox -->
-                                <Label text="Régimen fiscal" />
-                                <SearchableComboBox fx:id="cmbRegimenFiscal" promptText="Selecciona régimen fiscal" />
+                                <Label text="Régimen fiscal" styleClass="field-label"/>
+                                <SearchableComboBox fx:id="cmbRegimenFiscal" promptText="Selecciona régimen fiscal" styleClass="combo-box-custom"/>
                             </VBox>
                         </content>
                     </TitledPane>
 
                     <!-- DIRECCIÓN FISCAL -->
-                    <TitledPane expanded="false" text="Dirección fiscal">
+                    <TitledPane expanded="false" text="Dirección fiscal" styleClass="titled-pane-custom">
                         <content>
-                            <VBox spacing="8">
-                                <padding>
-                                    <Insets bottom="8" left="8" right="8" top="8" />
-                                </padding>
-                                <GridPane hgap="12.0" vgap="12.0">
+                            <VBox styleClass="titled-content">
+                                <GridPane hgap="12.0" vgap="12.0" styleClass="grid-pane-custom">
                                     <columnConstraints>
-                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
-                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
-                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
-                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0"/>
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0"/>
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0"/>
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0"/>
                                     </columnConstraints>
 
                                     <rowConstraints>
-                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                                     </rowConstraints>
 
                                     <children>
 
                                         <!-- País (col 0, row 0) -->
-                                        <Label text="País" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <ComboBox fx:id="cmbPais" maxWidth="Infinity" promptText="Selecciona país" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                                        <Label text="País" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                        <ComboBox fx:id="cmbPais" maxWidth="Infinity" promptText="Selecciona país"
+                                                  styleClass="combo-box-custom" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS"
+                                                  GridPane.rowIndex="1"/>
 
                                         <!-- Código postal (col 2 label, col 2-3 input) -->
-                                        <Label text="Código postal" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                                        <HBox spacing="8" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                                            <TextField fx:id="txtCodigoPostal" promptText="Código postal" HBox.hgrow="ALWAYS" />
-                                            <Button onAction="#onBuscarCodigoPostal" text="Buscar" />
+                                        <Label text="Código postal" styleClass="field-label" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                                        <HBox spacing="8" GridPane.columnIndex="2" GridPane.columnSpan="2"
+                                              GridPane.rowIndex="1">
+                                            <TextField fx:id="txtCodigoPostal" promptText="Código postal"
+                                                       styleClass="text-field-custom" HBox.hgrow="ALWAYS"/>
+                                            <Button onAction="#onBuscarCodigoPostal" text="Buscar" styleClass="btn-inline"/>
                                         </HBox>
 
                                         <!-- Estado (col 0 label + combo) -->
-                                        <Label text="Estado" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <ComboBox fx:id="cmbEstado" maxWidth="Infinity" promptText="Estado" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                                        <Label text="Estado" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                                        <ComboBox fx:id="cmbEstado" maxWidth="Infinity" promptText="Estado"
+                                                  styleClass="combo-box-custom" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS"
+                                                  GridPane.rowIndex="3"/>
 
                                         <!-- Municipio (col 1 label + combo) -->
-                                        <Label text="Municipio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                        <ComboBox fx:id="cmbMunicipio" maxWidth="Infinity" promptText="Municipio" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                                        <Label text="Municipio" styleClass="field-label" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                        <ComboBox fx:id="cmbMunicipio" maxWidth="Infinity" promptText="Municipio"
+                                                  styleClass="combo-box-custom" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS"
+                                                  GridPane.rowIndex="3"/>
 
                                         <!-- Colonia (col 2 label + combo spanning col 2-3) -->
-                                        <Label text="Colonia" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <ComboBox fx:id="cmbColonia" maxWidth="Infinity" promptText="Colonia" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                                        <Label text="Colonia" styleClass="field-label" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                        <ComboBox fx:id="cmbColonia" maxWidth="Infinity" promptText="Colonia"
+                                                  styleClass="combo-box-custom" GridPane.columnIndex="2" GridPane.columnSpan="2"
+                                                  GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"/>
 
                                         <!-- Calle (label + field spanning col 0-1) -->
-                                        <Label text="Calle" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                        <TextField fx:id="txtCalle" maxWidth="Infinity" promptText="Calle" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+                                        <Label text="Calle" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                                        <TextField fx:id="txtCalle" maxWidth="Infinity" promptText="Calle"
+                                                   styleClass="text-field-custom" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                                                   GridPane.hgrow="ALWAYS" GridPane.rowIndex="5"/>
 
                                         <!-- Número exterior / interior (col 2 and col 3) -->
-                                        <Label text="Número exterior" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                        <TextField fx:id="txtNumeroExterior" maxWidth="Infinity" promptText="No. exterior" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+                                        <Label text="Número exterior" styleClass="field-label" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                                        <TextField fx:id="txtNumeroExterior" maxWidth="Infinity"
+                                                   promptText="No. exterior" styleClass="text-field-custom" GridPane.columnIndex="2"
+                                                   GridPane.hgrow="ALWAYS" GridPane.rowIndex="5"/>
 
-                                        <Label text="Número interior" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                        <TextField fx:id="txtNumeroInterior" maxWidth="Infinity" promptText="No. interior" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" />
+                                        <Label text="Número interior" styleClass="field-label" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                                        <TextField fx:id="txtNumeroInterior" maxWidth="Infinity"
+                                                   promptText="No. interior" styleClass="text-field-custom" GridPane.columnIndex="3"
+                                                   GridPane.hgrow="ALWAYS" GridPane.rowIndex="5"/>
 
                                     </children>
                                 </GridPane>
@@ -128,58 +141,127 @@
                     </TitledPane>
 
                     <!-- CONTACTO -->
-                    <TitledPane expanded="false" text="Contacto">
+                    <TitledPane expanded="false" text="Contacto" styleClass="titled-pane-custom">
                         <content>
-                            <VBox spacing="8">
-                                <padding>
-                                    <Insets bottom="8" left="8" right="8" top="8" />
-                                </padding>
-
-                                <TextField fx:id="txtEmail" promptText="Email de contacto" />
-                                <TextField fx:id="txtTelefono" promptText="Teléfono" />
-                                <TextField fx:id="txtPaginaWeb" promptText="Página web" />
+                            <VBox styleClass="titled-content">
+                                <TextField fx:id="txtEmail" promptText="Email de contacto" styleClass="text-field-custom"/>
+                                <TextField fx:id="txtTelefono" promptText="Teléfono" styleClass="text-field-custom"/>
+                                <TextField fx:id="txtPaginaWeb" promptText="Página web" styleClass="text-field-custom"/>
                             </VBox>
                         </content>
                     </TitledPane>
 
                     <!-- CONFIGURACIÓN DE BASE DE DATOS (prefill y deshabilitado) -->
-                    <TitledPane expanded="false" text="Configuración de base de datos">
+                    <TitledPane expanded="false" text="Configuración de base de datos" styleClass="titled-pane-custom">
                         <content>
-                            <VBox spacing="8">
-                                <padding>
-                                    <Insets bottom="8" left="8" right="8" top="8" />
-                                </padding>
-
-                                <TextField fx:id="txtHost" disable="true" editable="false" promptText="Host" />
-                                <TextField fx:id="txtPort" disable="true" editable="false" promptText="Puerto" />
-                                <TextField fx:id="txtDatabase" disable="true" editable="false" promptText="Nombre de la base de datos" />
-                                <TextField fx:id="txtDbUser" disable="true" editable="false" promptText="Usuario" />
-                                <PasswordField fx:id="txtDbPass" disable="true" editable="false" promptText="Contraseña" />
+                            <VBox styleClass="titled-content">
+                                <TextField fx:id="txtHost" disable="true" editable="false" promptText="Host" styleClass="text-field-disabled"/>
+                                <TextField fx:id="txtPort" disable="true" editable="false" promptText="Puerto" styleClass="text-field-disabled"/>
+                                <TextField fx:id="txtDatabase" disable="true" editable="false"
+                                           promptText="Nombre de la base de datos" styleClass="text-field-disabled"/>
+                                <TextField fx:id="txtDbUser" disable="true" editable="false" promptText="Usuario" styleClass="text-field-disabled"/>
+                                <PasswordField fx:id="txtDbPass" disable="true" editable="false"
+                                               promptText="Contraseña" styleClass="text-field-disabled"/>
                             </VBox>
                         </content>
                     </TitledPane>
 
                     <!-- ARCHIVOS -->
-                    <TitledPane expanded="false" text="Archivos">
+                    <TitledPane text="Archivos" styleClass="titled-pane-custom">
                         <content>
-                            <VBox spacing="8">
-                                <padding>
-                                    <Insets bottom="8" left="8" right="8" top="8" />
-                                </padding>
+                            <VBox styleClass="container-vbox">
+                                <!-- Logo con vista previa -->
+                                <VBox styleClass="section-container">
+                                    <Label text="Logo de la empresa" styleClass="section-title"/>
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <!-- Vista previa del logo -->
+                                        <VBox styleClass="logo-preview-container" alignment="CENTER">
+                                            <ImageView fx:id="imgLogoPreview" fitWidth="60" fitHeight="60"
+                                                       preserveRatio="true"/>
+                                            <Label fx:id="lblLogoStatus" text="Sin logo" styleClass="status-label"/>
+                                        </VBox>
 
-                                <HBox spacing="8">
-                                    <TextField fx:id="txtLogo" editable="false" promptText="Logo" />
-                                    <Button onAction="#onSeleccionarLogo" text="Seleccionar" />
-                                </HBox>
+                                        <!-- Controles del logo -->
+                                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                            <HBox spacing="8">
+                                                <TextField fx:id="txtLogo" editable="false"
+                                                           promptText="Ruta del archivo de logo" HBox.hgrow="ALWAYS"
+                                                           styleClass="text-field-custom"/>
+                                                <Button onAction="#onSeleccionarLogo" text="Examinar"
+                                                        styleClass="btn-inline"/>
+                                            </HBox>
+                                            <Label text="Formatos recomendados: PNG, JPG (Tamaño máximo: 2MB)"
+                                                   styleClass="helper-text"/>
+                                        </VBox>
+                                    </HBox>
+                                </VBox>
 
-                                <HBox spacing="8">
-                                    <TextField fx:id="txtCertificado" editable="false" promptText="Certificado (.cer)" />
-                                    <Button onAction="#onSeleccionarCertificado" text="Seleccionar" />
-                                </HBox>
+                                <!-- Certificados y sellos -->
+                                <VBox spacing="12">
+                                    <Label text="Certificados digitales" styleClass="section-title"/>
 
-                                <HBox spacing="8">
-                                    <TextField fx:id="txtSello" editable="false" promptText="Sello digital (.key)" />
-                                    <Button onAction="#onSeleccionarSello" text="Seleccionar" />
+                                    <!-- Certificado -->
+                                    <VBox styleClass="section-container">
+                                        <HBox spacing="8" alignment="CENTER_LEFT">
+                                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                                <Label text="Certificado (.cer)" styleClass="field-label"/>
+                                                <HBox spacing="8">
+                                                    <TextField fx:id="txtCertificado" editable="false"
+                                                               promptText="Seleccionar archivo .cer" HBox.hgrow="ALWAYS"
+                                                               styleClass="text-field-custom"/>
+                                                    <Button onAction="#onSeleccionarCertificado" text="Seleccionar"
+                                                            styleClass="btn-inline"/>
+                                                </HBox>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+
+                                    <!-- Sello digital -->
+                                    <VBox styleClass="section-container">
+                                        <HBox spacing="8" alignment="CENTER_LEFT">
+                                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                                <Label text="Sello digital (.key)" styleClass="field-label"/>
+                                                <HBox spacing="8">
+                                                    <TextField fx:id="txtSello" editable="false"
+                                                               promptText="Seleccionar archivo .key" HBox.hgrow="ALWAYS"
+                                                               styleClass="text-field-custom"/>
+                                                    <Button onAction="#onSeleccionarSello" text="Seleccionar"
+                                                            styleClass="btn-inline"/>
+                                                </HBox>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+                                </VBox>
+
+                                <!-- Contraseña y prueba -->
+                                <VBox styleClass="section-container">
+                                    <Label text="Contraseña del certificado" styleClass="field-label"/>
+                                    <HBox spacing="8" alignment="CENTER_LEFT">
+                                        <TextField fx:id="txtPassword"
+                                                   promptText="Ingrese la contraseña del certificado"
+                                                   HBox.hgrow="ALWAYS"
+                                                   styleClass="text-field-custom"/>
+                                        <Button onAction="#onProbarContrasena" text="Probar contraseña"
+                                                styleClass="btn-inline"/>
+                                    </HBox>
+                                    <Label text="Pruebe la contraseña con los archivos cargados"
+                                           styleClass="helper-text"/>
+                                </VBox>
+
+                                <!-- Estado de archivos cargados -->
+                                <HBox styleClass="status-container">
+                                    <HBox spacing="5" alignment="CENTER">
+                                        <Circle fx:id="circleLogoStatus" radius="6" styleClass="status-circle"/>
+                                        <Label text="Logo" styleClass="status-text"/>
+                                    </HBox>
+                                    <HBox spacing="5" alignment="CENTER">
+                                        <Circle fx:id="circleCertStatus" radius="6" styleClass="status-circle"/>
+                                        <Label text="Certificado" styleClass="status-text"/>
+                                    </HBox>
+                                    <HBox spacing="5" alignment="CENTER">
+                                        <Circle fx:id="circleSelloStatus" radius="6" styleClass="status-circle"/>
+                                        <Label text="Sello digital" styleClass="status-text"/>
+                                    </HBox>
                                 </HBox>
                             </VBox>
                         </content>
@@ -187,8 +269,8 @@
 
                     <!-- BOTONES -->
                     <HBox alignment="CENTER_RIGHT" spacing="10">
-                        <Button onAction="#onCancelar" styleClass="btn-secondary" text="Cancelar" />
-                        <Button onAction="#onGuardar" styleClass="btn-primary" text="Guardar empresa" />
+                        <Button onAction="#onCancelar" styleClass="btn-secondary" text="Cancelar"/>
+                        <Button onAction="#onGuardar" styleClass="btn-primary" text="Guardar empresa"/>
                     </HBox>
 
                 </VBox>

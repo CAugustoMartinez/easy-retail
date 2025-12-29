@@ -3,6 +3,7 @@ package mx.sos.era.easyretail.ui;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import mx.sos.era.easyretail.master.service.AuthService;
@@ -10,12 +11,15 @@ import mx.sos.era.easyretail.master.service.EmpresaService;
 import mx.sos.era.easyretail.ui.controller.CatalogoEmpresasController;
 import mx.sos.era.easyretail.ui.controller.CrearEmpresaController;
 import mx.sos.era.easyretail.ui.controller.LoginController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NavigationService {
 
+    private static final Logger log = LogManager.getLogger(NavigationService.class);
     private final FxWindowManager windowManager;
     private final ApplicationContext ctx;
 
@@ -42,12 +46,14 @@ public class NavigationService {
                 // cerrar la ventana de login
                 primaryStage.close();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                log.error(ex.getMessage(), ex);
             }
         });
 
-        primaryStage.setScene(new Scene(root));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        Scene scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
     }
 
@@ -72,7 +78,7 @@ public class NavigationService {
             try {
                 openCrearEmpresa(new Stage());
             } catch (Exception ex) {
-                ex.printStackTrace();
+                log.error(ex.getMessage(), ex);
             }
         });
     }

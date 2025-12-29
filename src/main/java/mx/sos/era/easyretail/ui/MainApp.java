@@ -10,6 +10,8 @@ import mx.sos.era.easyretail.EasyRetailSpringApp;
 import mx.sos.era.easyretail.config.InstallerConfig;
 import mx.sos.era.easyretail.config.InstallerConfigLoader;
 import mx.sos.era.easyretail.config.InstallerWizard;
+import mx.sos.era.easyretail.master.entity.Usuario;
+import mx.sos.era.easyretail.master.repository.UsuarioRepository;
 import mx.sos.era.easyretail.master.service.AuthService;
 import mx.sos.era.easyretail.master.service.EmpresaService;
 import mx.sos.era.easyretail.ui.controller.CatalogoEmpresasController;
